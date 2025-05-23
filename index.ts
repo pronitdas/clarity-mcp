@@ -934,13 +934,15 @@ It supports various visual elements and operations to facilitate insight generat
                         label: { type: "string" },
                         properties: {
                             type: "object",
-                            additionalProperties: true,
+                            additionalProperties: false,
+                            properties: {}
                         },
                         source: { type: "string" },
                         target: { type: "string" },
                         contains: { type: "array", items: { type: "string" } },
                     },
                     required: ["id", "type", "properties"],
+                    additionalProperties: false
                 },
             },
             transformationType: {
@@ -959,19 +961,9 @@ It supports various visual elements and operations to facilitate insight generat
                     "custom",
                 ],
             },
-            iteration: { type: "number", minimum: 0 },
-            observation: { type: "string" },
-            insight: { type: "string" },
-            hypothesis: { type: "string" },
-            nextOperationNeeded: { type: "boolean" },
         },
-        required: [
-            "operation",
-            "diagramId",
-            "diagramType",
-            "iteration",
-            "nextOperationNeeded",
-        ],
+        required: ["operation", "elements", "diagramId", "diagramType"],
+        additionalProperties: false
     },
 };
 

@@ -10,6 +10,7 @@ import {
     ErrorCode,
 } from "@modelcontextprotocol/sdk/types.js";
 import chalk from "chalk";
+import http from "http";
 
 // Import server classes
 import { MentalModelServer } from "./tools/mentalModelServer";
@@ -1180,7 +1181,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 });
 
-async function runServer() {
+async function runServer() {    
     const transport = new StdioServerTransport();
     await server.connect(transport);
     console.error("Clear Thought MCP Server running on stdio");

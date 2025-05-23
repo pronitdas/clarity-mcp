@@ -8,12 +8,11 @@
     "clear-thought-mcp-server": "dist/bundle.js"
   },
   "scripts": {
-    "build": "tsc && node build.js",
     "dev": "tsc --watch",
-    "start": "node dist/index.js",
+    "build": "node build.js",
+    "start": "node dist/bundle.js",
     "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
-    "postbuild": "chmod +x dist/index.js"
+    "prepare": "npm run build"
   },
   "keywords": [
     "mcp",

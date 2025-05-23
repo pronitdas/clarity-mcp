@@ -13,6 +13,7 @@ The Clarity Mcp Server provides the following reasoning tools:
 - **🏗️ Design Patterns**: Software architecture and implementation patterns
 - **⚡ Programming Paradigms**: Different programming approaches (functional, OOP, etc.)
 - **🔍 Debugging Approaches**: Systematic debugging methodologies
+- **🧮 Memory Management**: Persistent memory graph with semantic search capabilities
 
 ### Advanced Reasoning Tools
 
@@ -174,6 +175,20 @@ Place this configuration in your client's MCP configuration file (e.g., `mcp.jso
 
 ## 📋 Tool Reference
 
+### Server Components
+- `SequentialThinkingServer`: Manages step-by-step reasoning processes
+- `MentalModelServer`: Handles mental model application
+- `DesignPatternServer`: Processes software design patterns
+- `ProgrammingParadigmServer`: Manages programming approach selection
+- `DebuggingApproachServer`: Handles debugging methodologies
+- `CollaborativeReasoningServer`: Manages multi-perspective analysis
+- `DecisionFrameworkServer`: Handles decision analysis
+- `MetacognitiveMonitoringServer`: Manages self-assessment
+- `ScientificMethodServer`: Handles scientific reasoning
+- `StructuredArgumentationServer`: Manages dialectical analysis
+- `VisualReasoningServer`: Handles visual thinking tools
+- `MemoryServer`: Manages persistent memory operations
+
 ### Mental Models Available
 - `first_principles` - Break down to fundamental truths
 - `opportunity_cost` - Analyze trade-offs and alternatives
@@ -193,11 +208,15 @@ Place this configuration in your client's MCP configuration file (e.g., `mcp.jso
 
 ### Programming Paradigms Available
 - `imperative` - Step-by-step instruction style
-- `functional` - Function-based computation
+- `procedural` - Function-based organization
 - `object_oriented` - Class and object modeling
-- `reactive` - Event-driven data flows
+- `functional` - Function-based computation
+- `declarative` - Outcome-focused programming
+- `logic` - Rule-based programming
+- `event_driven` - Event-based programming
+- `aspect_oriented` - Cross-cutting concern separation
 - `concurrent` - Parallel execution patterns
-- And more...
+- `reactive` - Event-driven data flows
 
 ### Debugging Approaches Available
 - `binary_search` - Bisection debugging method
@@ -206,6 +225,18 @@ Place this configuration in your client's MCP configuration file (e.g., `mcp.jso
 - `backtracking` - Execution path tracing
 - `cause_elimination` - Process of elimination
 - `program_slicing` - Code dependency analysis
+
+### Memory Operations Available
+- `add` - Add new memory nodes
+- `link` - Create relationships between memories
+- `search` - Search across stored memories
+- `context` - Retrieve memory context and relationships
+
+### Visual Reasoning Operations
+- Operations: `create`, `update`, `delete`, `transform`, `observe`
+- Diagram Types: `graph`, `flowchart`, `stateDiagram`, `conceptMap`, `treeDiagram`, `custom`
+- Element Types: `node`, `edge`, `container`, `annotation`
+- Transform Types: `rotate`, `move`, `resize`, `recolor`, `regroup`
 
 ## 🏗️ Architecture
 

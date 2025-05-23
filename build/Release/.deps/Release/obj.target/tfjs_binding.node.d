@@ -1,0 +1,1 @@
+cmd_Release/obj.target/tfjs_binding.node := g++ -o Release/obj.target/tfjs_binding.node -shared -pthread -rdynamic -m64  -Wl,-soname=tfjs_binding.node -Wl,--start-group Release/obj.target/node_modules/.pnpm/node-addon-api@7.1.1/node_modules/node-addon-api/nothing.a -Wl,--end-group 

@@ -1,10 +1,10 @@
-# Clear Thought MCP Server
+# Clarity Mcp Server
 
 A Model Context Protocol (MCP) server that provides structured reasoning and thinking tools for AI assistants. This server implements multiple cognitive frameworks and reasoning methodologies to enhance problem-solving capabilities.
 
 ## 🧠 Features
 
-The Clear Thought MCP Server provides the following reasoning tools:
+The Clarity Mcp Server provides the following reasoning tools:
 
 ### Core Reasoning Tools
 
@@ -34,29 +34,29 @@ The Clear Thought MCP Server provides the following reasoning tools:
 
 1. **Clone and setup:**
 ```bash
-git clone <repository-url>
-cd clear-thinking
-npm install
+git clone https://github.com/pronitdas/clarity-mcp.git
+cd clarity-mcp
+pnpm install
 ```
 
 2. **Build the server:**
 ```bash
-npm run build
+pnpm run build
 ```
 
 3. **Run the server:**
 ```bash
-npm start
+pnpm start
 ```
 
 ### Development
 
 ```bash
 # Watch mode for development
-npm run dev
+pnpm run dev
 
 # Clean build files
-npm run clean
+pnpm run clean
 ```
 
 ## 🛠️ Usage

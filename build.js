@@ -1,13 +1,16 @@
 const esbuild = require('esbuild');
-const { chmod, writeFile, mkdir } = require('fs/promises');
+const { chmod, writeFile, mkdir, rm } = require('fs/promises');
 const { dirname } = require('path');
 
 async function build() {
   try {
+    // Clean dist directory
+    await rm('dist', { recursive: true, force: true });
+    
     // Ensure dist directory exists
     await mkdir('dist', { recursive: true });
 
-    // Build the main code first
+    // Build the main code
     await esbuild.build({
       entryPoints: ['index.ts'],
       bundle: true,

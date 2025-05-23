@@ -1,6 +1,6 @@
 {
-  "name": "clarity-mcp-server-pronit",
-  "version": "1.1.10",
+  "name": "clarity-mcp-server",
+  "version": "1.1.11",
   "description": "A Model Context Protocol server providing structured reasoning and thinking tools with memory graph",
   "type": "commonjs",
   "main": "dist/index.js",

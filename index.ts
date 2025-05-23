@@ -9,7 +9,6 @@ import {
     McpError,
     ErrorCode,
 } from "@modelcontextprotocol/sdk/types.js";
-import chalk from "chalk";
 import http from "http";
 
 // Import server classes
@@ -24,6 +23,7 @@ import { MetacognitiveMonitoringServer } from "./tools/metacognitiveMonitoringSe
 import { ScientificMethodServer } from "./tools/scientificMethodServer";
 import { StructuredArgumentationServer } from "./tools/structuredArgumentationServer";
 import { VisualReasoningServer } from "./tools/visualReasoningServer";
+import { MemoryServer } from "./tools/memoryServer";
 
 // Tool Definitions
 const MENTAL_MODEL_TOOL: Tool = {
@@ -967,6 +967,41 @@ It supports various visual elements and operations to facilitate insight generat
     },
 };
 
+const MEMORY_TOOL: Tool = {
+    name: "memory",
+    description: `A tool for managing a persistent memory graph with semantic search capabilities.
+Supports operations for:
+- Adding new memory nodes (concepts, observations, tasks, solutions)
+- Linking related memories with labeled relationships
+- Semantic search across stored memories
+- Retrieving memory context and relationships
+
+Each memory is automatically embedded for semantic similarity search.`,
+    inputSchema: {
+        type: "object",
+        properties: {
+            operation: {
+                type: "string",
+                enum: ["add", "link", "search", "context"],
+            },
+            label: { type: "string" },
+            type: {
+                type: "string",
+                enum: ["concept", "observation", "task", "solution"],
+            },
+            metadata: { type: "object" },
+            fromId: { type: "string" },
+            toId: { type: "string" },
+            relation: { type: "string" },
+            text: { type: "string" },
+            nodeId: { type: "string" },
+            limit: { type: "number" },
+            threshold: { type: "number" },
+        },
+        required: ["operation"],
+    },
+};
+
 // Server Instances
 const modelServer = new MentalModelServer();
 const designPatternServer = new DesignPatternServer();
@@ -979,6 +1014,7 @@ const metacognitiveMonitoringServer = new MetacognitiveMonitoringServer();
 const scientificMethodServer = new ScientificMethodServer();
 const structuredArgumentationServer = new StructuredArgumentationServer();
 const visualReasoningServer = new VisualReasoningServer();
+const memoryServer = new MemoryServer();
 
 const server = new Server(
     {
@@ -997,6 +1033,7 @@ const server = new Server(
                 scientificmethod: SCIENTIFIC_METHOD_TOOL,
                 structuredargumentation: STRUCTURED_ARGUMENTATION_TOOL,
                 visualreasoning: VISUAL_REASONING_TOOL,
+                memory: MEMORY_TOOL,
             },
         },
     }
@@ -1016,6 +1053,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         SCIENTIFIC_METHOD_TOOL,
         STRUCTURED_ARGUMENTATION_TOOL,
         VISUAL_REASONING_TOOL,
+        MEMORY_TOOL,
     ],
 }));
 
@@ -1164,6 +1202,84 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                     },
                 ],
             };
+        }
+        case "memory": {
+            const args = request.params.arguments as any;
+            switch (args.operation) {
+                case "add":
+                    return {
+                        content: [
+                            {
+                                type: "text",
+                                text: JSON.stringify(
+                                    await memoryServer.addMemory({
+                                        label: args.label,
+                                        type: args.type,
+                                        metadata: args.metadata,
+                                    }),
+                                    null,
+                                    2
+                                ),
+                            },
+                        ],
+                    };
+                case "link":
+                    return {
+                        content: [
+                            {
+                                type: "text",
+                                text: JSON.stringify(
+                                    memoryServer.linkMemory({
+                                        fromId: args.fromId,
+                                        toId: args.toId,
+                                        relation: args.relation,
+                                        metadata: args.metadata,
+                                    }),
+                                    null,
+                                    2
+                                ),
+                            },
+                        ],
+                    };
+                case "search":
+                    return {
+                        content: [
+                            {
+                                type: "text",
+                                text: JSON.stringify(
+                                    await memoryServer.searchMemory({
+                                        text: args.text,
+                                        type: args.type,
+                                        limit: args.limit,
+                                        threshold: args.threshold,
+                                    }),
+                                    null,
+                                    2
+                                ),
+                            },
+                        ],
+                    };
+                case "context":
+                    return {
+                        content: [
+                            {
+                                type: "text",
+                                text: JSON.stringify(
+                                    memoryServer.getMemoryContext({
+                                        nodeId: args.nodeId,
+                                    }),
+                                    null,
+                                    2
+                                ),
+                            },
+                        ],
+                    };
+                default:
+                    throw new McpError(
+                        ErrorCode.InvalidArgument,
+                        `Unknown memory operation: ${args.operation}`
+                    );
+            }
         }
         default:
             throw new McpError(

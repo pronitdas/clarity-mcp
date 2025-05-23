@@ -18,9 +18,21 @@ async function build() {
       sourcemap: true,
       minify: false,
       external: [
+        // Core externals
         '@modelcontextprotocol/sdk',
-        'chalk'
-      ]
+        'chalk',
+        // TensorFlow related
+        '@tensorflow/tfjs-node',
+        '@tensorflow-models/universal-sentence-encoder',
+        // AWS and testing related (from node-pre-gyp)
+        'aws-sdk',
+        'mock-aws-s3',
+        'nock',
+        '@mapbox/node-pre-gyp'
+      ],
+      loader: {
+        '.html': 'text' // Handle HTML files as text
+      }
     });
 
     // Create the entry point with shebang

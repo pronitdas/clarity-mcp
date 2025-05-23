@@ -182,7 +182,7 @@ The server runs on stdio transport by default. Configuration can be adjusted in 
 ```typescript
 // Server configuration
 const server = new Server({
-  name: "clear-thought-mcp-server",
+  name: "clarity-mcp-server",
   version: "1.1.2"
 }, {
   capabilities: {

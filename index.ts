@@ -990,7 +990,7 @@ const visualReasoningServer = new VisualReasoningServer();
 
 const server = new Server(
     {
-        name: "clear-thought-mcp-server",
+        name: "clarity-mcp-server",
         version: "1.1.2",
         capabilities: {
             tools: {

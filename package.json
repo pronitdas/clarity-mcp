@@ -1,11 +1,11 @@
 {
-  "name": "clear-thought-mcp-server",
+  "name": "clarity-mcp-server",
   "version": "1.1.2",
   "description": "A Model Context Protocol server providing structured reasoning and thinking tools",
   "type": "commonjs",
   "main": "dist/bundle.js",
   "bin": {
-    "clear-thought-mcp-server": "dist/bundle.js"
+    "clarity-mcp-server": "dist/bundle.js"
   },
   "scripts": {
     "dev": "tsc --watch",
@@ -25,11 +25,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/clear-thinking.git"
+    "url": "https://github.com/pronitdas/clarity-mcp.git"
   },
-  "homepage": "https://github.com/yourusername/clear-thinking#readme",
+  "homepage": "https://github.com/pronitdas/clarity-mcp#readme",
   "bugs": {
-    "url": "https://github.com/yourusername/clear-thinking/issues"
+    "url": "https://github.com/pronitdas/clarity-mcp/issues"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.4.0",

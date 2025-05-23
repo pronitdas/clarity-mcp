@@ -18,7 +18,7 @@ LIBS :=
 $(obj).target/tfjs_binding.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(obj).target/tfjs_binding.node: LIBS := $(LIBS)
 $(obj).target/tfjs_binding.node: TOOLSET := $(TOOLSET)
-$(obj).target/tfjs_binding.node: $(obj).target/node_modules/.pnpm/node-addon-api@7.1.1/node_modules/node-addon-api/nothing.a FORCE_DO_CMD
+$(obj).target/tfjs_binding.node: $(obj).target/node_modules/node-addon-api/nothing.a FORCE_DO_CMD
 	$(call do_cmd,solink_module)
 
 all_deps += $(obj).target/tfjs_binding.node

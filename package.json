@@ -1,17 +1,24 @@
 {
   "name": "clarity-mcp-server",
-  "version": "1.1.5",
+  "version": "1.1.10",
   "description": "A Model Context Protocol server providing structured reasoning and thinking tools with memory graph",
   "type": "commonjs",
-  "main": "dist/bundle.js",
+  "main": "dist/index.js",
   "bin": {
-    "clarity-mcp-server": "dist/bundle.js"
+    "clarity-mcp-server": "./dist/bundle.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "tsc --watch",
     "prebuild": "npm rebuild @tensorflow/tfjs-node --build-from-source",
     "build": "node build.js",
-    "start": "node dist/bundle.js",
+    "start": "node dist/index.js",
     "clean": "rm -rf dist",
     "prepare": "npm run build"
   },

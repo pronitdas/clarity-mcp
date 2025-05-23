@@ -448,11 +448,19 @@
     "nodedir": "/home/pronit/.cache/node-gyp/22.13.1",
     "python": "/usr/bin/python3",
     "standalone_static_library": 1,
-    "user_agent": "pnpm/10.2.1 npm/? node/v22.13.1 linux x64",
-    "auto_install_peers": "true",
-    "registry": "https://registry.npmjs.org/",
-    "node_gyp": "/home/pronit/.nvm/versions/node/v22.13.1/lib/node_modules/pnpm/dist/node_modules/node-gyp/bin/node-gyp.js",
-    "frozen_lockfile": "",
-    "verify_deps_before_run": "false"
+    "user_agent": "npm/10.9.2 node/v22.13.1 linux x64 workspaces/false",
+    "userconfig": "/home/pronit/.npmrc",
+    "local_prefix": "/home/pronit/workspace/clear-thinking",
+    "prefix": "/home/pronit/.nvm/versions/node/v22.13.1",
+    "npm_version": "10.9.2",
+    "node_linker": "hoisted",
+    "cache": "/home/pronit/.npm",
+    "node_gyp": "/home/pronit/.nvm/versions/node/v22.13.1/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+    "use_node_version": "18.0.0",
+    "strict_peer_dependencies": "",
+    "globalconfig": "/home/pronit/.nvm/versions/node/v22.13.1/etc/npmrc",
+    "init_module": "/home/pronit/.npm-init.js",
+    "global_prefix": "/home/pronit/.nvm/versions/node/v22.13.1",
+    "shamefully_hoist": "true"
   }
 }

@@ -333,8 +333,8 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.S FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,node_modules/.pnpm/node-addon-api@7.1.1/node_modules/node-addon-api/nothing.target.mk)))),)
-  include node_modules/.pnpm/node-addon-api@7.1.1/node_modules/node-addon-api/nothing.target.mk
+                 $(join ^,node_modules/node-addon-api/nothing.target.mk)))),)
+  include node_modules/node-addon-api/nothing.target.mk
 endif
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
@@ -343,8 +343,8 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /home/pronit/workspace/clear-thinking/node_modules/.pnpm/node-gyp@10.3.1/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/pronit/.cache/node-gyp/22.13.1" "-Dnode_gyp_dir=/home/pronit/workspace/clear-thinking/node_modules/.pnpm/node-gyp@10.3.1/node_modules/node-gyp" "-Dnode_lib_file=/home/pronit/.cache/node-gyp/22.13.1/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/pronit/workspace/clear-thinking" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/home/pronit/workspace/clear-thinking/build/config.gypi -I/home/pronit/workspace/clear-thinking/node_modules/.pnpm/node-gyp@10.3.1/node_modules/node-gyp/addon.gypi -I/home/pronit/.cache/node-gyp/22.13.1/include/node/common.gypi "--toplevel-dir=." binding.gyp
-Makefile: $(srcdir)/node_modules/.pnpm/node-addon-api@7.1.1/node_modules/node-addon-api/node_api.gyp $(srcdir)/binding.gyp $(srcdir)/build/config.gypi $(srcdir)/../../.cache/node-gyp/22.13.1/include/node/common.gypi $(srcdir)/node_modules/.pnpm/node-gyp@10.3.1/node_modules/node-gyp/addon.gypi
+cmd_regen_makefile = cd $(srcdir); /home/pronit/workspace/clear-thinking/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/home/pronit/.cache/node-gyp/22.13.1" "-Dnode_gyp_dir=/home/pronit/workspace/clear-thinking/node_modules/node-gyp" "-Dnode_lib_file=/home/pronit/.cache/node-gyp/22.13.1/<(target_arch)/node.lib" "-Dmodule_root_dir=/home/pronit/workspace/clear-thinking" "-Dnode_engine=v8" "--depth=." "-Goutput_dir=." "--generator-output=build" -I/home/pronit/workspace/clear-thinking/build/config.gypi -I/home/pronit/workspace/clear-thinking/node_modules/node-gyp/addon.gypi -I/home/pronit/.cache/node-gyp/22.13.1/include/node/common.gypi "--toplevel-dir=." binding.gyp
+Makefile: $(srcdir)/build/config.gypi $(srcdir)/node_modules/node-gyp/addon.gypi $(srcdir)/node_modules/node-addon-api/node_api.gyp $(srcdir)/binding.gyp $(srcdir)/../../.cache/node-gyp/22.13.1/include/node/common.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included

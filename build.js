@@ -10,7 +10,7 @@ async function build() {
     // Ensure dist directory exists
     await mkdir('dist', { recursive: true });
 
-    // Build the main code
+    // First build the main bundle without shebang
     await esbuild.build({
       entryPoints: ['index.ts'],
       bundle: true,
@@ -18,7 +18,7 @@ async function build() {
       target: 'node18',
       format: 'cjs',
       outfile: 'dist/index.js',
-      sourcemap: true,
+      sourcemap: 'external',
       minify: false,
       external: [
         // Core externals
@@ -34,16 +34,16 @@ async function build() {
         '@mapbox/node-pre-gyp'
       ],
       loader: {
-        '.html': 'text' // Handle HTML files as text
+        '.html': 'text'
       }
     });
 
-    // Create the entry point with shebang
-    const entryPoint = `#!/usr/bin/env node
+    // Create the CLI wrapper
+    const cliWrapper = `#!/usr/bin/env node
 require('./index.js');`;
 
-    // Write the entry point
-    await writeFile('dist/bundle.js', entryPoint);
+    // Write the CLI wrapper
+    await writeFile('dist/bundle.js', cliWrapper);
     await chmod('dist/bundle.js', 0o755);
     
     console.log('Build completed successfully!');

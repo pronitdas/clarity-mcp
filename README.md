@@ -61,7 +61,57 @@ npm run clean
 
 ## 🛠️ Usage
 
-The server implements the Model Context Protocol and can be used with any MCP-compatible client (like Claude Desktop, Cursor, or other AI assistants).
+### MCP Integration Guide
+
+The Clear Thought MCP Server is designed to be integrated with AI assistants through the Model Context Protocol (MCP). Here's how to integrate and use the server:
+
+#### 1. Server Connection
+- The server runs on stdio transport by default
+- Ensure your MCP client is configured to connect via stdio
+- Connection URL format: `mcp://localhost:0/clear-thinking`
+
+#### 2. Authentication
+- No authentication required for local development
+- For production, implement your authentication strategy in `index.ts`
+
+#### 3. Tool Registration
+Register the tools with your MCP client:
+
+```typescript
+const tools = {
+  sequentialthinking: {
+    name: "sequentialthinking",
+    description: "Step-by-step reasoning with revision capabilities",
+    parameters: {
+      thought: "string",
+      thoughtNumber: "number",
+      totalThoughts: "number",
+      nextThoughtNeeded: "boolean"
+    }
+  },
+  // ... other tools ...
+};
+```
+
+#### 4. Error Handling
+- Tools return structured error responses
+- Check response.error for error details
+- Handle timeouts and connection issues appropriately
+
+### MCP Client Configuration
+
+The server can be integrated with MCP-compatible clients using a simple configuration file. Here's a typical example:
+
+```json
+{
+  "command": "npx",
+  "args": [
+    "clarity-mcp-server"
+  ],
+}
+```
+
+Place this configuration in your client's MCP configuration file (e.g., `mcp.json`). The server will be started automatically when the client needs to use the reasoning tools.
 
 ### Example Tool Usage
 
@@ -177,13 +227,26 @@ clear-thinking/
 
 ## 🔧 Configuration
 
-The server runs on stdio transport by default. Configuration can be adjusted in `index.ts`:
+### MCP Server Configuration
+The server supports the following configuration options in `index.ts`:
 
 ```typescript
-// Server configuration
+const config = {
+  transport: "stdio", // or "tcp" for network transport
+  port: 0, // default for stdio
+  timeout: 30000, // tool execution timeout in ms
+  maxConcurrent: 10, // max concurrent tool executions
+  logging: {
+    level: "info",
+    format: "json"
+  }
+};
+
+// Server initialization
 const server = new Server({
   name: "clarity-mcp-server",
-  version: "1.1.2"
+  version: "1.1.2",
+  config
 }, {
   capabilities: {
     tools: { /* tool definitions */ }
@@ -230,6 +293,23 @@ npm run build
 - Ensure the server is running on stdio
 - Check client MCP configuration
 - Verify tool schema compatibility
+
+### MCP-Specific Issues
+
+**Tool Execution Timeouts:**
+- Increase timeout in server configuration
+- Check for blocking operations in tool implementation
+- Monitor system resources
+
+**Schema Validation Errors:**
+- Verify tool parameter types match schema
+- Check for required parameters
+- Validate enum values are correct
+
+**Transport Issues:**
+- For stdio: Check process stdin/stdout handling
+- For TCP: Verify network connectivity and ports
+- Check for conflicting transport configurations
 
 ## 📖 Further Reading
 

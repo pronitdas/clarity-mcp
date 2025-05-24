@@ -25,8 +25,7 @@ async function build() {
         '@modelcontextprotocol/sdk',
         'chalk',
         // TensorFlow related
-        '@tensorflow/tfjs-node',
-        '@tensorflow-models/universal-sentence-encoder',
+       
         // AWS and testing related (from node-pre-gyp)
         'aws-sdk',
         'mock-aws-s3',

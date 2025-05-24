@@ -1,0 +1,16 @@
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+numpy>=1.21.0
+pydantic>=2.0.0
+requests>=2.25.0
+einops>=0.8.1
+# Optional ML libraries (install based on your preference)
+# For best performance, install sentence-transformers:
+sentence-transformers>=2.2.0
+
+# Alternative: if you prefer just transformers:
+# torch>=2.0.0
+# transformers>=4.30.0
+
+# For CPU-only deployment, you can use:
+# torch==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu 

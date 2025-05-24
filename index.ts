@@ -10,6 +10,7 @@ import {
     ErrorCode,
 } from "@modelcontextprotocol/sdk/types.js";
 import http from "http";
+import path from "path";
 
 // Import server classes
 import { MentalModelServer } from "./tools/mentalModelServer";
@@ -23,7 +24,7 @@ import { MetacognitiveMonitoringServer } from "./tools/metacognitiveMonitoringSe
 import { ScientificMethodServer } from "./tools/scientificMethodServer";
 import { StructuredArgumentationServer } from "./tools/structuredArgumentationServer";
 import { VisualReasoningServer } from "./tools/visualReasoningServer";
-import { MemoryServer } from "./tools/memoryServer";
+import { EnhancedMemoryServer } from "./tools/memoryServer";
 
 // Tool Definitions
 const MENTAL_MODEL_TOOL: Tool = {
@@ -1014,7 +1015,13 @@ const metacognitiveMonitoringServer = new MetacognitiveMonitoringServer();
 const scientificMethodServer = new ScientificMethodServer();
 const structuredArgumentationServer = new StructuredArgumentationServer();
 const visualReasoningServer = new VisualReasoningServer();
-const memoryServer = new MemoryServer();
+
+// Initialize memory server with model path
+const modelPath = path.join(__dirname, '../models/nomic-embed-text-v1.5.onnx');
+const memoryServer = new EnhancedMemoryServer(modelPath);
+
+// Initialize memory server asynchronously
+memoryServer.initialize().catch(console.warn);
 
 const server = new Server(
     {
@@ -1265,9 +1272,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                             {
                                 type: "text",
                                 text: JSON.stringify(
-                                    memoryServer.getMemoryContext({
-                                        nodeId: args.nodeId,
-                                    }),
+                                    memoryServer.getMemoryContext(args.nodeId),
                                     null,
                                     2
                                 ),
@@ -1276,7 +1281,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                     };
                 default:
                     throw new McpError(
-                        ErrorCode.InvalidArgument,
+                        ErrorCode.InvalidParams,
                         `Unknown memory operation: ${args.operation}`
                     );
             }

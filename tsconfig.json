@@ -9,6 +9,7 @@
     "outDir": "./dist",
     "rootDir": "./",
     "strict": true,
+    "isolatedModules": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

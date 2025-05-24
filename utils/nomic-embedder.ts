@@ -69,10 +69,16 @@ class NomicEmbedder {
         // Use the virtual environment to start the server
         const activateAndRun = `source venv/bin/activate && python3 embedding_server.py`;
         
+        // Clean environment to avoid conflicts
+        const cleanEnv = { ...process.env };
+        // Remove any conflicting environment variables
+        delete cleanEnv.MODEL_PATH;
+        delete cleanEnv.ONNX_MODEL_PATH;
+        
         this.serverProcess = spawn('bash', ['-c', activateAndRun], {
             cwd: this.serverDir,
             env: {
-                ...process.env,
+                ...cleanEnv,
                 PORT: this.serverPort.toString(),
                 HOST: '127.0.0.1'
             },

@@ -2,8 +2,7 @@ import { EnhancedMemoryServer } from './memoryServer';
 import path from 'path';
 
 // Global memory server instance with model path
-const modelPath = path.join(__dirname, '../../models/nomic-embed-text-v1.5.onnx');
-const memoryServer = new EnhancedMemoryServer(modelPath);
+const memoryServer = new EnhancedMemoryServer();
 
 // Initialize memory server
 let initPromise: Promise<void> | null = null;

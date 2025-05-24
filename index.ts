@@ -1017,8 +1017,7 @@ const structuredArgumentationServer = new StructuredArgumentationServer();
 const visualReasoningServer = new VisualReasoningServer();
 
 // Initialize memory server with model path
-const modelPath = path.join(__dirname, '../models/nomic-embed-text-v1.5.onnx');
-const memoryServer = new EnhancedMemoryServer(modelPath);
+const memoryServer = new EnhancedMemoryServer();
 
 // Initialize memory server asynchronously
 memoryServer.initialize().catch(console.warn);
